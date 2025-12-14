@@ -4,9 +4,13 @@ warnings.filterwarnings("ignore", category=UserWarning)
 import streamlit as st
 import numpy as np
 import joblib
+import os
 
-model = joblib.load("diabetes_logistic_model.pkl")
-scaler = joblib.load("scaler.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = joblib.load(os.path.join(BASE_DIR, "diabetes_logistic_model.pkl"))
+scaler = joblib.load(os.path.join(BASE_DIR, "scaler.pkl"))
+
 
 st.title("Diabetes Prediction App")
 
@@ -30,3 +34,4 @@ if st.button("Predict"):
         st.error("Diabetic")
     else:
         st.success("Not Diabetic")
+
